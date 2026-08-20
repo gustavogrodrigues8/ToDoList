@@ -76,13 +76,40 @@ public class ToDoList {
                     
                     int indiceConcluir = numeroConcluir - 1;
                     
-                    if (indiceC1oncluir >= 0 && indiceConcluir < tarefas.length && tarefas[indiceConcluir] != null){
+                    if (indiceConcluir >= 0 && indiceConcluir < tarefas.length && tarefas[indiceConcluir] != null){
                         concluidas[indiceConcluir] = true;
                         
                         System.out.println("tarefa marcada como concluida");
                     }else{
                         System.out.println("tarefa invalida");
                     }
+                    
+                    break;
+                    
+                case 4:
+                    System.out.println("Digite o numero da tarefa que deseja excluir: ");
+                    int numeroExcluir = scanner.nextInt();
+                    
+                    int indiceExcluir = numeroExcluir - 1;
+                    
+                    if (indiceExcluir >= 0 && indiceExcluir < tarefas.length && tarefas[indiceExcluir] != null){
+                        
+                        tarefas[indiceExcluir] = null;
+                        concluidas[indiceExcluir] = false;
+                        
+                        System.out.println("tarefa excluida com sucesso");
+                    }else{
+                        System.out.println("tarefa invalida");
+                    }
+                    
+                    break;
+                    
+                case 5:
+                    System.out.println("Programa encerrado");
+                break;
+                default:
+                    System.out.println("opcao invalida");
+                break;
             }
         }
     }
