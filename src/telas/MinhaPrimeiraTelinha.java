@@ -20,7 +20,7 @@ public class MinhaPrimeiraTelinha extends javax.swing.JFrame {
     public MinhaPrimeiraTelinha() {
         initComponents();
         
-        JOptionPane.showMessageDialog(null, "Hello World");
+        //JOptionPane.showMessageDialog(null, "Hello World");
     }
 
     /**

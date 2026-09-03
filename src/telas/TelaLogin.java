@@ -15,7 +15,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
 
     private static final String usuario = "GustavoGameplays123";
-    private static final String senha = "BolsonaroDeCalcinha";
+    private static final String senha = "ILOVEBOLSONARO";
     /**
      * Creates new form TelaLogin
      */
