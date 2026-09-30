@@ -58,6 +58,7 @@ public class TelaToDoList extends javax.swing.JFrame {
         jButtonAdicionarTarefa.addActionListener(this::jButtonAdicionarTarefaActionPerformed);
 
         jComboBoxFiltroStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Concluído", "Não Concluído" }));
+        jComboBoxFiltroStatus.addItemListener(this::jComboBoxFiltroStatusItemStateChanged);
         jComboBoxFiltroStatus.addActionListener(this::jComboBoxFiltroStatusActionPerformed);
 
         jTableTarefas.setModel(new javax.swing.table.DefaultTableModel(
@@ -173,6 +174,7 @@ public class TelaToDoList extends javax.swing.JFrame {
                     if (dados[1].equals(NAO_CONCLUIDA)){
                     tarefasFiltradas.add(tarefa);
                 }
+                    break;
                 default:
                     throw new AssertionError();
             }
@@ -227,6 +229,12 @@ public class TelaToDoList extends javax.swing.JFrame {
         
             preencherTabela();
     }//GEN-LAST:event_jButtonRemoverTarefaActionPerformed
+
+    private void jComboBoxFiltroStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFiltroStatusItemStateChanged
+        filtrarTabela();
+        
+        preencherTabela();
+    }//GEN-LAST:event_jComboBoxFiltroStatusItemStateChanged
 
     public boolean hasTarefaRepetida(String novaTarefa){
         for (String tarefa : tarefas){
