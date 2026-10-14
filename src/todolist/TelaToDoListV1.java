@@ -96,11 +96,11 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tarefa", "Status", "Data"
+                "Tarefa", "Status", "Data Criação", "Data Conclusão"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -234,7 +234,7 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
         LocalDateTime dataAtual = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         
-        tarefas.add(jTextFieldDescricaoTarefa.getText() + ";" + NAO_CONCLUIDA + ";" + dataAtual.format(formato));
+        tarefas.add(jTextFieldDescricaoTarefa.getText() + ";" + NAO_CONCLUIDA + ";" + dataAtual.format(formato) + ";");
         
         salvarTarefa();
         
@@ -259,7 +259,13 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
         
         String[] dados = tarefas.get(indiceTarefaSelecionada).split(";");
         
-        tarefas.set(indiceTarefaSelecionada, dados[0] + ";" + CONCLUIDA + ";" + dados[2]);
+        LocalDateTime dataAtual = LocalDateTime.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String dataConclusao = dataAtual.format(formato);
+        
+        tarefas.set(indiceTarefaSelecionada, dados[0] + ";" + CONCLUIDA + ";" + dados[2] + ";" + dataConclusao);
+        
+        salvarTarefa();
         
         atualizarEstatisticas();
         
@@ -295,6 +301,8 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
             preencherTabela();
         }
         
+        salvarTarefa();
+        
         atualizarEstatisticas();
         
         filtrarTabela();
@@ -311,26 +319,27 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldTotalActionPerformed
 
     private void preencherTabela(){
-        ArrayList <String> listaTarefas;
-        
-        if (jComboBoxFiltroStatus.getSelectedIndex() > 0){
-            listaTarefas = tarefasFiltradas;
-        }else{
-            listaTarefas = tarefas;
-        }
-        
-        model.setRowCount(0);
-        
-        for (String tarefa : listaTarefas){
-            String[] dados = tarefa.split(";");
-
-            model.addRow(new Object[]{
-                dados[0],
-                dados[1],
-                dados[2]
-            });
-        }
+    ArrayList <String> listaTarefas;
+    
+    if (jComboBoxFiltroStatus.getSelectedIndex() > 0){
+        listaTarefas = tarefasFiltradas;
+    }else{
+        listaTarefas = tarefas;
     }
+    
+    model.setRowCount(0);
+    
+    for (String tarefa : listaTarefas){
+        String[] dados = tarefa.split(";");
+
+        model.addRow(new Object[]{
+            dados[0],
+            dados[1],
+            dados[2],
+            dados.length > 3 ? dados[3] : " "
+        });
+    }
+}
     
     private void filtrarTabela(){
         int opcao = jComboBoxFiltroStatus.getSelectedIndex();
